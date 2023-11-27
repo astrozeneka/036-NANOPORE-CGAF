@@ -1,8 +1,9 @@
 #!/bin/bash
 
-genomes=($(ls data/raw_reads/*.*))
+genomes=($(ls data/raw_reads/*/*))
 for genome in "${genomes[@]}"
 do
+  genome=$(realpath "data/raw_reads/*/*/$genome")
   echo "Processing genome: ${genome}"
 done
 echo "Done"
