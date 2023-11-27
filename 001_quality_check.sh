@@ -1,4 +1,9 @@
 #!/bin/bash
+#SBATCH -p memory
+#SBATCH -n 1 -c 16
+#SBATCH -t 96:00:00
+#SBATCH -J QC_GCAF
+#SBATCH -A proj5034
 
 source ~/.bashrc
 mkdir -p data/01_fastqc_report
@@ -19,7 +24,7 @@ do
   fullpath=$(realpath data/raw_reads/*/*/$genome) # Full path to the genome fastq.gz file
 
   # 1. เช็กคุณภาพ reads
-  fastqc fullpath -o data/01_fastqc_report/
+  fastqc $fullpath -o data/01_fastqc_report/ -t 16
   exit
 done
 echo "Done"
